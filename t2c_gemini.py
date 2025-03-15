@@ -158,7 +158,7 @@ def main():
         st.header("Instructions")
         st.write("1. Optional: Select a generative model")
         st.write("2. Optional: Enter your own Google AI Studio API key below or use our shared API key. Our shared API key will be subject to rate limitiations with all other webpage users.")
-        st.write("3. Provide specifciations for a CAD model to the LLM assistant in the box below (e.g. Scandanavian Table) then click \'Generate Code\'. The generated code can then be pasted in a FreeCAD Macro and executed. To revise the code")
+        st.write("3. Provide specifciations for a CAD model to the LLM assistant in the box below (e.g. Scandanavian Table) then click \'Generate Code\'. The generated code can then be pasted in a FreeCAD Macro and executed.")
         st.write("4. Paste the generated code in a FreeCAD Macro and execute.")
         st.write("5. Provide revision feedback to the AI agent to improve or modify the original code.")
         st.write("6. Keep revising (5) or refresh and generate a new design.")
