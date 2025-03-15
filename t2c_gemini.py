@@ -6,7 +6,7 @@ import os
 import pymongo
 from bson import ObjectId
 
-st.set_page_config(page_icon="🏋🏽", layout="wide",
+st.set_page_config(page_icon="🛠️", layout="wide",
                    page_title="T2C Gemini")
 
 def icon(emoji: str):
@@ -152,10 +152,24 @@ def apply_suggestions(code: str, suggestions: str, original_description: str, GE
 # --- Streamlit App ---
 
 def main():
-    st.title("FreeCAD Code Generator with Gemini")
-    st.write("Provide guidelines for a CAD model to the LLM assistant. You can enter your own Google AI Studio API key below or use our shared API key which will be subject to rate limitiations.")
-    st.write("Note that we write all prompts and feedback to a MongoDB database with the hopes of fine-tuning an LLM for CAD generation in the future.")
+    with st.sidebar:
+        url = 'https://cmoreno41.github.io/GeminiFreeCAD'
+
+        st.header("Instructions")
+        st.write("1. Optional: Select a generative model")
+        st.write("2. Optional: Enter your own Google AI Studio API key below or use our shared API key. Our shared API key will be subject to rate limitiations with all other webpage users.")
+        st.write("3. Provide specifciations for a CAD model to the LLM assistant in the box below (e.g. Scandanavian Table) then click \'Generate Code\'. The generated code can then be pasted in a FreeCAD Macro and executed. To revise the code")
+        st.write("4. Paste the generated code in a FreeCAD Macro and execute.")
+        st.write("5. Provide revision feedback to the AI agent to improve or modify the original code.")
+        st.write("6. Keep revising (5) or refresh and generate a new design.")
+        st.markdown("---")  # Add a separator line
+        
+        st.write("Note: In this webpage we write all prompts and feedback to a MongoDB database with the hopes of fine-tuning an LLM for CAD generation in the future." )
+        st.markdown("This is an alternative to downloading the FreeCad Macro gemini interface directly from: [GeminiFreeCad Webpage](%s)." %url)
     
+    
+    st.title("FreeCAD Code Generator with Gemini")
+
     available_models = [
             "gemini-2.0-pro-exp-02-05",
             "gemini-1.5-pro-002",
@@ -165,7 +179,7 @@ def main():
     selected_model_name = st.selectbox("Select a Generative Model:", available_models)
 
     # Gemini API Key (Use st.secrets, with fallback)
-    api_key = st.text_input("Enter your Google AI Studio API Key (optional):", type="password")
+    api_key = st.text_input("OPTIONAL: Enter your Google AI Studio API Key", type="password")
     if not api_key:
         api_key = st.secrets.get("GOOGLE_API_KEY")
     if not api_key:
