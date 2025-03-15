@@ -153,17 +153,52 @@ def apply_suggestions(code: str, suggestions: str, original_description: str, GE
 
 def main():
     with st.sidebar:
-        url = 'https://cmoreno41.github.io/GeminiFreeCAD'
+        url = 'https://computergenerateddesign.com/'
 
         st.header("Instructions")
         st.write("1. Optional: Select a generative model")
         st.write("2. Optional: Enter your own Google AI Studio API key below or use our shared API key. Our shared API key will be subject to rate limitiations with all other webpage users.")
-        st.write("3. Provide specifciations for a CAD model to the LLM assistant in the box below (e.g. Scandanavian Table) then click \'Generate Code\'. The generated code can then be pasted in a FreeCAD Macro and executed.")
-        st.write("4. Paste the generated code in a FreeCAD Macro and execute.")
-        st.write("5. Provide revision feedback to the AI agent to improve or modify the original code.")
-        st.write("6. Keep revising (5) or refresh and generate a new design.")
-        st.markdown("---")  # Add a separator line
+        st.write("3. Provide specifciations for a CAD model to the LLM assistant in the box below (e.g.Table, 40cm tall) then click \'Generate Code\'. The generated code can then be pasted in a FreeCAD Macro and executed.")
+        try:
+            gif_path = "https://raw.githubusercontent.com/cmoreno41/GeminiFreeCAD/refs/heads/main/streamlit_gif.gif"
+            st.sidebar.image(gif_path, caption="Code Generation")
+        except FileNotFoundError:
+            st.error("Error loading GIF. Please check the file path.")
         
+        st.write("4. In FreeCad, navigate to \"Macro\" in the toolbar and select \"Macros\".")
+        try:
+            img_path = "https://raw.githubusercontent.com/cmoreno41/CGDFreeCAD/refs/heads/main/streamlit_png/Macro_click.png"
+            st.sidebar.image(img_path, caption="Create Macro")
+        except FileNotFoundError:
+            st.error("Error loading image. Please check the file path.")
+        
+        st.write("5. Select \"Create Macro\" and name your new macro file.")
+        try:
+            img_path = "https://raw.githubusercontent.com/cmoreno41/CGDFreeCAD/refs/heads/main/streamlit_png/Create_macro.png"
+            st.sidebar.image(img_path, caption="Create Macro")
+        except FileNotFoundError:
+            st.error("Error loading image. Please check the file path.")
+
+        st.write("6. Paste the generated code in the new FreeCAD Macro." )
+        
+
+        st.write("7. Click \"Execute Macro\" in the macros toolbar to generate your model.")
+        try:
+            img_path = "https://raw.githubusercontent.com/cmoreno41/CGDFreeCAD/refs/heads/main/streamlit_png/execute_macro.png"
+            st.sidebar.image(img_path, caption="execute Macro")
+        except FileNotFoundError:
+            st.error("Error loading image. Please check the file path.")
+
+        st.write("8. Provide revision feedback to the AI agent to improve or modify the original code.")
+        try:
+            img_path = "https://raw.githubusercontent.com/cmoreno41/CGDFreeCAD/refs/heads/main/streamlit_png/improvement.png"
+            st.sidebar.image(img_path, caption="Improve Macro")
+        except FileNotFoundError:
+            st.error("Error loading image. Please check the file path.")
+
+        st.write("9. Keep generating and revising in the same macro file or refresh the app to generate a new design.")
+        st.markdown("---")  # Add a separator line
+
         st.write("Note: In this webpage we write all prompts and feedback to a MongoDB database with the hopes of fine-tuning an LLM for CAD generation in the future." )
         st.markdown("This is an alternative to downloading the FreeCad Macro gemini interface directly from: [GeminiFreeCad Webpage](%s)." %url)
     
